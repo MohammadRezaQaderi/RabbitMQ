@@ -1,2 +1,2 @@
 # RabbitMQ
-The Message broker use by docker and python 
+RabbitMQ is an open-source message broker that implements AMQP (Advanced Message Queue Protocol).
