@@ -13,3 +13,14 @@ rabbit mq
 		the client to server we have basic_publish
 		the server to client we have basic_get
 		before all this we should have the channel and queue (connection)
+
+
+
+	Sub/Pub (send to all consumers the message)
+		Exchanges
+			{
+				Direct Exchange(default)
+				Topic Exchange
+				Fanout Exchange
+				Headers Exchange
+			}
