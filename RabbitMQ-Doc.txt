@@ -1,2 +1,15 @@
 rabbit mq
-	--
+	--AMQP
+		frame structure => frame type(1byte) - channel(2byte) - size(4byte) -  frame specific content(from 7 to size+7 byte) - frame end(1byte)
+		frames type {
+			method frame:
+			content header frame:
+			body frame:
+			heartbeat frame:
+		}
+		farme specific content => class id - method id - arg 1 arg 2 ... 
+
+	we have some kind of connection 
+		the client to server we have basic_publish
+		the server to client we have basic_get
+		before all this we should have the channel and queue (connection)

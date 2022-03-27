@@ -63,7 +63,7 @@ channel.basic_consume(queue='name-send', auto_ack=True, on_message_callback=on_m
 print("[*] Start listening")
 channel.start_consuming()
 ```
-In the preceding code,`on_message_callback` means that what to do when message is received, `auto_ack=True` means that it automatically acknowledges receipt of the message.
+In the preceding code,`on_message_callback` means that what to do when message is received, `auto_ack=True` means that it automatically acknowledges receipt of the message if it is false it come back to the queue if consumer did not process it.
 
 ### Execution
 At the first we running `consume.py`, we can see this line in command line. 
