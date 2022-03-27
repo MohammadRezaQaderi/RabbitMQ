@@ -44,3 +44,33 @@ Finally, we close the connection in Producer side.
 ```python
 connection.close()
 ```
+
+### Consumer
+At the first its like the Producer we have make channel.
+```python 
+import pika
+connection_parameters = pika.ConnectionParameters('localhost')
+connection = pika.BlockingConnection(connection_parameters)
+channel  = connection.channel()
+channel.queue_declare(queue='name-send')
+```
+
+We can consume the message by use this code.
+```python
+def on_message_received(ch, method, properties, body):
+    print(f" [x] received {body}")
+channel.basic_consume(queue='name-send', auto_ack=True, on_message_callback=on_message_received)
+print("[*] Start listening")
+channel.start_consuming()
+```
+In the preceding code,`on_message_callback` means that what to do when message is received, `auto_ack=True` means that it automatically acknowledges receipt of the message.
+
+### Execution
+At the first we running `consume.py`, we can see this line in command line. 
+```text
+[*] Start listening for message.
+```
+Then after executing `producer.py`, it sends `"hello I am mgh27"` to the `name-send` queue and consumer receives and prints that on the terminal.
+
+**What if we have multiple consumers?** By having this kind of implementation, it executes Round-robin algorithm.
+**But what if after receiving the third message, the first consumer is busy, and the second consumer is free?** Since it uses Round-robin algorithm, it could be problematic.
